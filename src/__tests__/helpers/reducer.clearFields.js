@@ -2,6 +2,81 @@ import actions from '../../actions'
 const { clearFields } = actions
 
 const describeClearFields = (reducer, expect, { fromJS }) => () => {
+  it('should clear fields value when state is altered', () => {
+    const state = reducer(
+      fromJS({
+        foo: {
+          registeredFields: {
+            'info.firstName': {
+              name: 'info.firstName',
+              type: 'Field',
+              count: 1
+            },
+            'info.lastName': {
+              name: 'info.lastName',
+              type: 'Field',
+              count: 1
+            },
+            age: {
+              name: 'age',
+              type: 'Field',
+              count: 1
+            }
+          },
+          values: {
+            info: {
+              firstName: 'Jane',
+              lastName: 'Doe'
+            },
+            age: '42'
+          },
+          initial: {
+            info: {
+              firstName: 'Jane',
+              lastName: 'Doe'
+            },
+            age: '42'
+          }
+        }
+      }),
+      clearFields('foo', false, false, 'info.firstName')
+    )
+    expect(state).toEqualMap({
+      foo: {
+        registeredFields: {
+          'info.firstName': {
+            name: 'info.firstName',
+            type: 'Field',
+            count: 1
+          },
+          'info.lastName': {
+            name: 'info.lastName',
+            type: 'Field',
+            count: 1
+          },
+          age: {
+            name: 'age',
+            type: 'Field',
+            count: 1
+          }
+        },
+        values: {
+          info: {
+            lastName: 'Doe'
+          },
+          age: '42'
+        },
+        initial: {
+          info: {
+            firstName: 'Jane',
+            lastName: 'Doe'
+          },
+          age: '42'
+        }
+      }
+    })
+  })
+
   it('should clear fields value, touched, submitErrors', () => {
     const state = reducer(
       fromJS({
