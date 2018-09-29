@@ -81,6 +81,8 @@ import React, { createElement, Component } from 'react'
 import PropTypes from 'prop-types'
 import prefixName from './util/prefixName'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var FormSection = (function(_Component) {
   _inherits(FormSection, _Component)
 
@@ -150,11 +152,7 @@ var FormSection = (function(_Component) {
 
 FormSection.propTypes = {
   name: PropTypes.string.isRequired,
-  component: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string,
-    PropTypes.node
-  ])
+  component: validateComponentProp
 }
 
 FormSection.defaultProps = {

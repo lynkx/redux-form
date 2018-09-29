@@ -80,3 +80,4 @@ export var touch = actions.touch
 export var unregisterField = actions.unregisterField
 export var untouch = actions.untouch
 export var updateSyncWarnings = actions.updateSyncWarnings
+export var updateSyncErrors = actions.updateSyncErrors

@@ -88,6 +88,8 @@ import invariant from 'invariant'
 import createConnectedFieldArray from './ConnectedFieldArray'
 import prefixName from './util/prefixName'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var toArray = function toArray(value) {
   return Array.isArray(value) ? value : [value]
 }
@@ -232,11 +234,7 @@ var createFieldArray = function createFieldArray(structure) {
 
   FieldArray.propTypes = {
     name: PropTypes.string.isRequired,
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     props: PropTypes.object,
     validate: PropTypes.oneOfType([
       PropTypes.func,

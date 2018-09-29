@@ -76,6 +76,8 @@ import shallowCompare from './util/shallowCompare'
 import prefixName from './util/prefixName'
 import plain from './structure/plain'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var createField = function createField(structure) {
   var ConnectedField = createConnectedField(structure)
 
@@ -236,11 +238,7 @@ var createField = function createField(structure) {
 
   Field.propTypes = {
     name: PropTypes.string.isRequired,
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     format: PropTypes.func,
     normalize: PropTypes.func,
     onBlur: PropTypes.func,

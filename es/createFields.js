@@ -76,6 +76,8 @@ import shallowCompare from './util/shallowCompare'
 import plain from './structure/plain'
 import prefixName from './util/prefixName'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var validateNameProp = function validateNameProp(prop) {
   if (!prop) {
     return new Error('No "names" prop was specified <Fields/>')
@@ -234,11 +236,7 @@ var createFields = function createFields(structure) {
     names: function names(props, propName) {
       return validateNameProp(props[propName])
     },
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     format: PropTypes.func,
     parse: PropTypes.func,
     props: PropTypes.object,

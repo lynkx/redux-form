@@ -73,6 +73,8 @@ import createFieldArrayProps from './createFieldArrayProps'
 
 import plain from './structure/plain'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var propsToNotUpdateFor = ['_reduxForm', 'value']
 
 var createConnectedFieldArray = function createConnectedFieldArray(structure) {
@@ -250,11 +252,7 @@ var createConnectedFieldArray = function createConnectedFieldArray(structure) {
   })(React.Component)
 
   ConnectedFieldArray.propTypes = {
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     props: PropTypes.object,
     rerenderOnEveryChange: PropTypes.bool
   }

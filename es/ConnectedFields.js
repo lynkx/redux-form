@@ -84,6 +84,8 @@ import createFieldProps from './createFieldProps'
 import plain from './structure/plain'
 import onChangeValue from './events/onChangeValue'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var propsToNotUpdateFor = ['_reduxForm']
 
 var createConnectedFields = function createConnectedFields(structure) {
@@ -317,11 +319,7 @@ var createConnectedFields = function createConnectedFields(structure) {
   })(React.Component)
 
   ConnectedFields.propTypes = {
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     _fields: PropTypes.object.isRequired,
     props: PropTypes.object
   }

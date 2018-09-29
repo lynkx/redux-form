@@ -23,8 +23,17 @@ function _toConsumableArray(arr) {
   }
 }
 
+import { Iterable } from 'immutable'
 import isPromise from 'is-promise'
 import SubmissionError from './SubmissionError'
+
+var mergeErrors = function mergeErrors(_ref) {
+  var asyncErrors = _ref.asyncErrors,
+    syncErrors = _ref.syncErrors
+  return asyncErrors && Iterable.isIterable(asyncErrors)
+    ? asyncErrors.merge(syncErrors).toJS()
+    : _extends({}, asyncErrors, syncErrors)
+}
 
 var handleSubmit = function handleSubmit(
   submit,
@@ -129,7 +138,10 @@ var handleSubmit = function handleSubmit(
     }
   } else {
     setSubmitFailed.apply(undefined, _toConsumableArray(fields))
-    var errors = _extends({}, asyncErrors, syncErrors)
+    var errors = mergeErrors({
+      asyncErrors: asyncErrors,
+      syncErrors: syncErrors
+    })
     if (onSubmitFail) {
       onSubmitFail(errors, dispatch, null, props)
     }

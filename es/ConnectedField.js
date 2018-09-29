@@ -100,6 +100,8 @@ import { dataKey } from './util/eventConsts'
 import plain from './structure/plain'
 import isReactNative from './isReactNative'
 
+import validateComponentProp from './util/validateComponentProp'
+
 var propsToNotUpdateFor = ['_reduxForm']
 
 var isObject = function isObject(entity) {
@@ -472,11 +474,7 @@ var createConnectedField = function createConnectedField(structure) {
   })(Component)
 
   ConnectedField.propTypes = {
-    component: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.string,
-      PropTypes.node
-    ]).isRequired,
+    component: validateComponentProp,
     props: PropTypes.object
   }
 

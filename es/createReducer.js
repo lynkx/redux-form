@@ -68,7 +68,7 @@ var shouldDelete = function shouldDelete(_ref) {
   return function(state, path) {
     var initialValuesPath = null
 
-    if (path.startsWith('values')) {
+    if (/^values/.test(path)) {
       initialValuesPath = path.replace('values', 'initial')
     }
 
